@@ -3,7 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 
 const ExeSelected = ({ selectedText }) => {
     return (
-        <View style={styles.container}>
+        <View style={styles.footerContainer}>
             <Text style={styles.Title}>SELECTED EXERCISES:</Text>
             <Text style={styles.selectTextt}>{selectedText}</Text>
         </View>
@@ -11,7 +11,7 @@ const ExeSelected = ({ selectedText }) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    footerContainer: {
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',

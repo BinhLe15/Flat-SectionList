@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, ImageBackground, SectionList, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ImageBackground, SectionList, ScrollView, SafeAreaView } from 'react-native';
 import Button from './button';
 import { fruits_vegetables, workouts } from './data';
 import ExeSelected from './select';
@@ -20,43 +20,50 @@ export default function App() {
   }
   return (
     <ScrollView>
-    <View style={styles.container}>
-      <Text style={styles.listText}>FlatList - Workouts</Text>
-      <ImageBackground
-        style={styles.listImage}
-        source={require('./assets/images/gym.jpg')}
-      >
-        <FlatList
-          data={workouts}
-          renderItem={({ item }) => {
-            return (
-              <Button ButtonName={item.type} chooseExe={chooseExe} />
-            )
-          }}
-        />
-      </ImageBackground>
-      <Text style={styles.listText}>SecondList - Fruits & Vegetables</Text>
-      <ImageBackground
-        style={styles.listImage}
-        source={require('./assets/images/vegetables.jpg')}
-      >
-        <SectionList
-          sections={fruits_vegetables}
-          keyExtractor={(item, index) => item + index}
-          renderItem={({ item }) => {
-            return (
-              <Button ButtonName={item} chooseExe={chooseExe} />
-            )
-          }}
-          renderSectionHeader={({ section: { title } }) => (
-            <Text style={styles.scText}>{title}</Text>
-          )}
-        />
-      </ImageBackground>
-
-      <ExeSelected selectedText={selectedExe} />
-
-    </View>
+      <View style={styles.container}>
+        <Text style={styles.listText}>FlatList - Workouts</Text>
+        {/* <ScrollView> */}
+        <View >
+          <ImageBackground
+            style={styles.listImage}
+            source={require('./assets/images/gym.jpg')}
+          >
+            <FlatList
+              data={workouts}
+              contentContainerStyle={styles.listContainer}
+              renderItem={({ item }) => {
+                return (
+                  <Button ButtonName={item.type} chooseExe={chooseExe} style={{ backgroundColor: 'white' }} />
+                )
+              }}
+              style={styles.listItem}
+            />
+          </ImageBackground>
+          <Text style={styles.listText}>SecondList - Fruits & Vegetables</Text>
+          <ImageBackground
+            style={styles.listImage}
+            source={require('./assets/images/vegetables.jpg')}
+          >
+            <SectionList
+              sections={fruits_vegetables}
+              keyExtractor={(item, index) => item + index}
+              contentContainerStyle={styles.listContainer}
+              renderItem={({ item }) => {
+                return (
+                  <Button ButtonName={item} chooseExe={chooseExe} />
+                )
+              }}
+              renderSectionHeader={({ section: { title } }) => (
+                <Text style={styles.scText}>{title}</Text>
+              )}
+            />
+          </ImageBackground>
+        </View>
+        {/* </ScrollView> */}
+        <View style={styles.exeSelectedContainer}>
+          <ExeSelected selectedText={selectedExe} />
+        </View>
+      </View>
     </ScrollView>
   );
 }
@@ -65,6 +72,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    padding: 25,
   },
   listImage: {
     height: 'auto',
@@ -77,11 +85,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'blue',
     marginVertical: 10,
+    // position: 'absolute'
   },
   scText: {
     color: 'white',
     fontSize: 17,
     fontWeight: 'bold',
     margin: 15,
-  }
+  },
+  listContainer: {
+    width: '105%',
+    margin: 10,
+  },
+  exeSelectedContainer: {
+  //  position: 'absolute'
+  },
 });

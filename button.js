@@ -35,14 +35,17 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         margin: 'auto',
         marginTop: 10,
+        backgroundColor: 'white',
     },
     Text: {
         marginLeft: 10,
-        // fontSize: 17,
+        fontSize: 17,
         // fontStyle: 500,
+        fontWeight: '500',
+
     },
     btn: {
-        backgroundColor: 'lightblue',
+        backgroundColor: '#5e95f2',
         width: '30%',
         height: 40,
         alignItems: 'center',
